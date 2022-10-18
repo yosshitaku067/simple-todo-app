@@ -8,28 +8,34 @@ function CustomApp({ Component, pageProps }: AppProps) {
   return (
     <ModalProvider>
       <Head>
-        <title>Welcome to frontend!</title>
+        <title>{"One Man's Todo"}</title>
       </Head>
       <nav className="sticky top-0 z-30  bg-teal-500 p-6">
         <div className="container mx-auto flex flex-wrap items-center justify-between">
           <div className=" mr-6 flex flex-shrink-0 items-center text-white">
             <Title className="text-xl font-semibold tracking-tight">
-              Todos
+              {"One Man's Todo"}
             </Title>
           </div>
           <div className="block w-full flex-grow lg:flex lg:w-auto lg:items-center lg:justify-end">
             <div>
               <a
                 href="#"
-                className="mt-4 inline-block rounded border border-white px-4 py-2 text-sm leading-none text-white hover:border-transparent hover:bg-white hover:text-teal-500 lg:mt-0"
+                className="mt-4 mr-4 inline-block rounded border border-white px-4 py-2 text-sm leading-none text-white hover:border-transparent hover:bg-white hover:text-teal-500 lg:mt-0"
               >
                 Export CSV
+              </a>
+              <a
+                href="#"
+                className="mt-4 inline-block rounded border border-white px-4 py-2 text-sm leading-none text-white hover:border-transparent hover:bg-white hover:text-teal-500 lg:mt-0"
+              >
+                Export Text
               </a>
             </div>
           </div>
         </div>
       </nav>
-      <main className="container mx-auto">
+      <main className="container mx-auto px-6">
         <Component {...pageProps} />
       </main>
     </ModalProvider>

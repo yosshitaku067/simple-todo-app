@@ -10,7 +10,7 @@ const InputButton: React.FC<Props> = ({ colorType, ...rest }) => {
   return (
     <input
       {...rest}
-      className={`flex-no-shrink rounded border-2 p-2 ${color}`}
+      className={`flex-no-shrink rounded border-2 py-2 px-4 ${color}`}
     />
   );
 };

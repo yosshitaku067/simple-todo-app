@@ -5,342 +5,16 @@ import ModalEditTodoDetail from '../components/modal/modal-edit-todo-detail.comp
 import { modalContext } from '../components/modal/modal.context';
 import ProjectCard from '../components/project-card.component';
 import uniqueNumberId from '../mock/unique-number-id';
-import { Project, Todo, TodoStatus } from '../models';
-import Button from '../components/buttons/button.component';
+import { Project, Todo } from '../models';
 import FormInputWithButton from '../components/form/form-input-with-button.component';
 import HeadingPrimary from '../components/heading/heading-primary.component';
-
-const DAYJS_FORMAT = 'YYYY/MM/DD HH:mm:ss';
-
-const PROJECTS = [
-  {
-    id: uniqueNumberId(),
-    name: 'Project 1',
-    description: 'Project Overview Description aaaaaaaaaaaa',
-    updatedAt: dayjs().format(DAYJS_FORMAT),
-    createdAt: dayjs().format(DAYJS_FORMAT),
-    counts: {
-      open: 3,
-      closed: 4,
-      completed: 7,
-    },
-    todos: [
-      {
-        id: uniqueNumberId(),
-        name: 'todo1',
-        descriptions: [
-          {
-            id: uniqueNumberId(),
-            text: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-            updatedAt: dayjs().format(DAYJS_FORMAT),
-            createdAt: dayjs().format(DAYJS_FORMAT),
-          },
-          {
-            id: uniqueNumberId(),
-            text: 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
-            updatedAt: dayjs().format(DAYJS_FORMAT),
-            createdAt: dayjs().format(DAYJS_FORMAT),
-          },
-          {
-            id: uniqueNumberId(),
-            text: 'cccccccccccccccccccccccccccccccccccccccccccccc',
-            updatedAt: dayjs().format(DAYJS_FORMAT),
-            createdAt: dayjs().format(DAYJS_FORMAT),
-          },
-        ],
-        progress: 60,
-        updatedAt: dayjs().format(DAYJS_FORMAT),
-        createdAt: dayjs().format(DAYJS_FORMAT),
-        user: {
-          name: 'よしたく',
-        },
-        status: 'OPEN' as TodoStatus,
-      },
-      {
-        id: uniqueNumberId(),
-        name: 'todo2',
-        descriptions: [
-          {
-            id: uniqueNumberId(),
-            text: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-            updatedAt: dayjs().format(DAYJS_FORMAT),
-            createdAt: dayjs().format(DAYJS_FORMAT),
-          },
-          {
-            id: uniqueNumberId(),
-            text: 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
-            updatedAt: dayjs().format(DAYJS_FORMAT),
-            createdAt: dayjs().format(DAYJS_FORMAT),
-          },
-          {
-            id: uniqueNumberId(),
-            text: 'cccccccccccccccccccccccccccccccccccccccccccccc',
-            updatedAt: dayjs().format(DAYJS_FORMAT),
-            createdAt: dayjs().format(DAYJS_FORMAT),
-          },
-        ],
-        progress: 30,
-        updatedAt: dayjs().format(DAYJS_FORMAT),
-        createdAt: dayjs().format(DAYJS_FORMAT),
-        user: {
-          name: 'よしたく',
-        },
-        status: 'OPEN' as TodoStatus,
-      },
-      {
-        id: uniqueNumberId(),
-        name: 'todo3',
-        descriptions: [
-          {
-            id: uniqueNumberId(),
-            text: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-            updatedAt: dayjs().format(DAYJS_FORMAT),
-            createdAt: dayjs().format(DAYJS_FORMAT),
-          },
-          {
-            id: uniqueNumberId(),
-            text: 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
-            updatedAt: dayjs().format(DAYJS_FORMAT),
-            createdAt: dayjs().format(DAYJS_FORMAT),
-          },
-          {
-            id: uniqueNumberId(),
-            text: 'cccccccccccccccccccccccccccccccccccccccccccccc',
-            updatedAt: dayjs().format(DAYJS_FORMAT),
-            createdAt: dayjs().format(DAYJS_FORMAT),
-          },
-        ],
-        progress: 80,
-        updatedAt: dayjs().format(DAYJS_FORMAT),
-        createdAt: dayjs().format(DAYJS_FORMAT),
-        user: {
-          name: 'よしたく',
-        },
-        status: 'OPEN' as TodoStatus,
-      },
-    ],
-  },
-  {
-    id: uniqueNumberId(),
-    name: 'Project 2',
-    description: 'Project Overview Description aaaaaaaaaaaa',
-    updatedAt: dayjs().format(DAYJS_FORMAT),
-    createdAt: dayjs().format(DAYJS_FORMAT),
-    counts: {
-      open: 3,
-      closed: 4,
-      completed: 7,
-    },
-    todos: [
-      {
-        id: uniqueNumberId(),
-        name: 'todo1',
-        descriptions: [
-          {
-            id: uniqueNumberId(),
-            text: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-            updatedAt: dayjs().format(DAYJS_FORMAT),
-            createdAt: dayjs().format(DAYJS_FORMAT),
-          },
-          {
-            id: uniqueNumberId(),
-            text: 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
-            updatedAt: dayjs().format(DAYJS_FORMAT),
-            createdAt: dayjs().format(DAYJS_FORMAT),
-          },
-          {
-            id: uniqueNumberId(),
-            text: 'cccccccccccccccccccccccccccccccccccccccccccccc',
-            updatedAt: dayjs().format(DAYJS_FORMAT),
-            createdAt: dayjs().format(DAYJS_FORMAT),
-          },
-        ],
-        progress: 20,
-        updatedAt: dayjs().format(DAYJS_FORMAT),
-        createdAt: dayjs().format(DAYJS_FORMAT),
-        user: {
-          name: 'よしたく',
-        },
-        status: 'OPEN' as TodoStatus,
-      },
-      {
-        id: uniqueNumberId(),
-        name: 'todo2',
-        descriptions: [
-          {
-            id: uniqueNumberId(),
-            text: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-            updatedAt: dayjs().format(DAYJS_FORMAT),
-            createdAt: dayjs().format(DAYJS_FORMAT),
-          },
-          {
-            id: uniqueNumberId(),
-            text: 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
-            updatedAt: dayjs().format(DAYJS_FORMAT),
-            createdAt: dayjs().format(DAYJS_FORMAT),
-          },
-          {
-            id: uniqueNumberId(),
-            text: 'cccccccccccccccccccccccccccccccccccccccccccccc',
-            updatedAt: dayjs().format(DAYJS_FORMAT),
-            createdAt: dayjs().format(DAYJS_FORMAT),
-          },
-        ],
-        progress: 40,
-        updatedAt: dayjs().format(DAYJS_FORMAT),
-        createdAt: dayjs().format(DAYJS_FORMAT),
-        user: {
-          name: 'よしたく',
-        },
-        status: 'OPEN' as TodoStatus,
-      },
-      {
-        id: uniqueNumberId(),
-        name: 'todo3',
-        descriptions: [
-          {
-            id: uniqueNumberId(),
-            text: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-            updatedAt: dayjs().format(DAYJS_FORMAT),
-            createdAt: dayjs().format(DAYJS_FORMAT),
-          },
-          {
-            id: uniqueNumberId(),
-            text: 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
-            updatedAt: dayjs().format(DAYJS_FORMAT),
-            createdAt: dayjs().format(DAYJS_FORMAT),
-          },
-          {
-            id: uniqueNumberId(),
-            text: 'cccccccccccccccccccccccccccccccccccccccccccccc',
-            updatedAt: dayjs().format(DAYJS_FORMAT),
-            createdAt: dayjs().format(DAYJS_FORMAT),
-          },
-        ],
-        progress: 90,
-        updatedAt: dayjs().format(DAYJS_FORMAT),
-        createdAt: dayjs().format(DAYJS_FORMAT),
-        user: {
-          name: 'よしたく',
-        },
-        status: 'OPEN' as TodoStatus,
-      },
-    ],
-  },
-  {
-    id: uniqueNumberId(),
-    name: 'Project 3',
-    description: 'Project Overview Description aaaaaaaaaaaa',
-    updatedAt: dayjs().format(DAYJS_FORMAT),
-    createdAt: dayjs().format(DAYJS_FORMAT),
-    counts: {
-      open: 3,
-      closed: 4,
-      completed: 7,
-    },
-    todos: [
-      {
-        id: uniqueNumberId(),
-        name: 'todo1',
-        descriptions: [
-          {
-            id: uniqueNumberId(),
-            text: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-            updatedAt: dayjs().format(DAYJS_FORMAT),
-            createdAt: dayjs().format(DAYJS_FORMAT),
-          },
-          {
-            id: uniqueNumberId(),
-            text: 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
-            updatedAt: dayjs().format(DAYJS_FORMAT),
-            createdAt: dayjs().format(DAYJS_FORMAT),
-          },
-          {
-            id: uniqueNumberId(),
-            text: 'cccccccccccccccccccccccccccccccccccccccccccccc',
-            updatedAt: dayjs().format(DAYJS_FORMAT),
-            createdAt: dayjs().format(DAYJS_FORMAT),
-          },
-        ],
-        progress: 10,
-        updatedAt: dayjs().format(DAYJS_FORMAT),
-        createdAt: dayjs().format(DAYJS_FORMAT),
-        user: {
-          name: 'よしたく',
-        },
-        status: 'OPEN' as TodoStatus,
-      },
-      {
-        id: uniqueNumberId(),
-        name: 'todo2',
-        descriptions: [
-          {
-            id: uniqueNumberId(),
-            text: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-            updatedAt: dayjs().format(DAYJS_FORMAT),
-            createdAt: dayjs().format(DAYJS_FORMAT),
-          },
-          {
-            id: uniqueNumberId(),
-            text: 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
-            updatedAt: dayjs().format(DAYJS_FORMAT),
-            createdAt: dayjs().format(DAYJS_FORMAT),
-          },
-          {
-            id: uniqueNumberId(),
-            text: 'cccccccccccccccccccccccccccccccccccccccccccccc',
-            updatedAt: dayjs().format(DAYJS_FORMAT),
-            createdAt: dayjs().format(DAYJS_FORMAT),
-          },
-        ],
-        progress: 100,
-        updatedAt: dayjs().format(DAYJS_FORMAT),
-        createdAt: dayjs().format(DAYJS_FORMAT),
-        user: {
-          name: 'よしたく',
-        },
-        status: 'OPEN' as TodoStatus,
-      },
-      {
-        id: uniqueNumberId(),
-        name: 'todo3',
-        descriptions: [
-          {
-            id: uniqueNumberId(),
-            text: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-            updatedAt: dayjs().format(DAYJS_FORMAT),
-            createdAt: dayjs().format(DAYJS_FORMAT),
-          },
-          {
-            id: uniqueNumberId(),
-            text: 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
-            updatedAt: dayjs().format(DAYJS_FORMAT),
-            createdAt: dayjs().format(DAYJS_FORMAT),
-          },
-          {
-            id: uniqueNumberId(),
-            text: 'cccccccccccccccccccccccccccccccccccccccccccccc',
-            updatedAt: dayjs().format(DAYJS_FORMAT),
-            createdAt: dayjs().format(DAYJS_FORMAT),
-          },
-        ],
-        progress: 30,
-        updatedAt: dayjs().format(DAYJS_FORMAT),
-        createdAt: dayjs().format(DAYJS_FORMAT),
-        user: {
-          name: 'よしたく',
-        },
-        status: 'OPEN' as TodoStatus,
-      },
-    ],
-  },
-];
+import { PROJECTS } from '../mock/projects';
+import { DAYJS_FORMAT } from '../helper/dayjs-format';
 
 export function Index() {
   const { openModal, closeModal } = useContext(modalContext);
 
   const [projects, setProjects] = useState(PROJECTS);
-  const [newProjectName, setNewProjectName] = useState('');
 
   const handleClcikProjectNameEdit = (project: Project) => {
     const modalId = 'project-name-edit-modal';
@@ -486,15 +160,31 @@ export function Index() {
     setProjects([...newProjects]);
   };
 
-  const handleAddNewProject = () => {};
+  const handleAddNewProject = (value: string) => {
+    projects.push({
+      id: uniqueNumberId(),
+      name: value,
+      description: '',
+      updatedAt: dayjs().format(DAYJS_FORMAT),
+      createdAt: dayjs().format(DAYJS_FORMAT),
+      todos: [],
+      counts: {
+        closed: 0,
+        completed: 0,
+        open: 0,
+      },
+    });
+
+    setProjects([...projects]);
+  };
 
   return (
-    <div className="mt-8">
-      <div className="mb-6">
+    <div className="mt-2">
+      <div className="mb-3">
         <HeadingPrimary data-en="Projects">プロジェクト一覧</HeadingPrimary>
       </div>
 
-      <div className="mb-6">
+      <div className="mb-3">
         <FormInputWithButton
           submitLabel="新規追加"
           placeholder="新規で追加するプロジェクト名"
@@ -504,7 +194,7 @@ export function Index() {
 
       {projects.map((project) => {
         return (
-          <div key={project.id} className="mb-8">
+          <div key={project.id} className="mb-3">
             <ProjectCard
               project={project}
               onClickProjectNameEdit={() => handleClcikProjectNameEdit(project)}

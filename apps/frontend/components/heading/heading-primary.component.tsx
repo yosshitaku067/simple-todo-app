@@ -3,14 +3,14 @@ import styled from 'styled-components';
 
 const H2 = styled.h2`
   position: relative;
-  padding-top: 16px;
-  font-size: 32px;
+  padding-top: 8px;
+  font-size: 24px;
   font-weight: 700;
 
   &::before {
     content: attr(data-en);
     display: block;
-    font-size: 24px;
+    font-size: 18px;
     color: #0f766e;
   }
 
