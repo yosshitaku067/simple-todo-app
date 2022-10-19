@@ -7,7 +7,7 @@ type Props = JSX.IntrinsicElements['button'] & {
 
 const Button: React.FC<PropsWithChildren<Props>> = ({
   children,
-  colorType,
+  colorType = 'primary',
   ...rest
 }) => {
   const color = colorClassNames(colorType) + ' ' + rest.className;
@@ -15,7 +15,7 @@ const Button: React.FC<PropsWithChildren<Props>> = ({
     <button
       {...rest}
       type="button"
-      className={`flex-no-shrink p-2 border-2 rounded ${color}`}
+      className={`flex-no-shrink rounded border-2 p-2 ${color}`}
     >
       {children}
     </button>

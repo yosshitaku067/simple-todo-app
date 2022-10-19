@@ -10,23 +10,32 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Todo {
-  id           Int           @id @default(autoincrement())
-  name         String        @unique
-  descriptions Description[]
-  progress     Float
-  updatedAt    DateTime      @updatedAt
-  createdAt    DateTime      @default(now())
-  user         User          @relation(fields: [userId], references: [id])
-  userId       Int
-  status       Status
-  kind         Kind          @relation(fields: [kindId], references: [id])
-  kindId       Int
+model Project {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String   @default("")
+  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now())
+  todo        Todo[]
 }
 
-model Description {
+model Todo {
+  id         Int        @id @default(autoincrement())
+  name       String
+  activities Activity[]
+  progress   Float
+  updatedAt  DateTime   @updatedAt
+  createdAt  DateTime   @default(now())
+  user       User       @relation(fields: [userId], references: [id])
+  userId     Int
+  status     Status     @default(OPEN)
+  project    Project    @relation(fields: [projectId], references: [id])
+  projectId  Int
+}
+
+model Activity {
   id        Int      @id @default(autoincrement())
-  text      String
+  text      String   @default("")
   Todo      Todo     @relation(fields: [todoId], references: [id])
   todoId    Int
   updatedAt DateTime @updatedAt
@@ -39,14 +48,6 @@ model User {
   Todo      Todo[]
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
-}
-
-model Kind {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique
-  updatedAt DateTime @updatedAt
-  createdAt DateTime @default(now())
-  Todo      Todo[]
 }
 
 enum Status {

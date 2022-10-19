@@ -5,7 +5,7 @@ type Props = JSX.IntrinsicElements['input'] & {
   colorType?: ColorType;
 };
 
-const InputButton: React.FC<Props> = ({ colorType, ...rest }) => {
+const InputButton: React.FC<Props> = ({ colorType = 'primary', ...rest }) => {
   const color = colorClassNames(colorType) + ' ' + rest.className;
   return (
     <input

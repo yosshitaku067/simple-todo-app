@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
-import { DAYJS_FORMAT } from '../helper/dayjs-format';
-import { TodoStatus } from '../models';
+import { DAYJS_FORMAT } from '../app/helper/dayjs-format';
+import { TodoStatus } from '../app/models';
 import uniqueNumberId from './unique-number-id';
 
 export const PROJECTS = [

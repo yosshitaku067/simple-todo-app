@@ -12,7 +12,9 @@
         "outputPath": "dist/apps/frontend"
       },
       "configurations": {
-        "development": {},
+        "development": {
+          "outputPath": "apps/frontend"
+        },
         "production": {}
       }
     },
@@ -43,7 +45,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/frontend"],
+      "outputs": ["{workspaceRoot}/coverage/apps/frontend"],
       "options": {
         "jestConfig": "apps/frontend/jest.config.ts",
         "passWithNoTests": true

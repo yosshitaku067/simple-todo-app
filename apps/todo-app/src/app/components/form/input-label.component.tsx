@@ -14,7 +14,7 @@ const InputLabel: React.FC<
   return (
     <StyledInputLabel
       {...rest}
-      className={`inline text-2xl font-bold text-teal-900 ${rest.className}`}
+      className={`inline text-2xl font-bold text-teal-900 ${rest['className']}`}
     >
       {children}
     </StyledInputLabel>
