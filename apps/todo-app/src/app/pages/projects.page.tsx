@@ -12,6 +12,8 @@ import {
   useAllProjectsQuery,
   useCreateProjectMutation,
   AllProjectsQuery,
+  useUpdateProjectNameMutation,
+  useUpdateProjectDescriptionMutation,
 } from '../graphql/generated/graphql';
 import { DAYJS_FORMAT } from '../helper/dayjs-format';
 import { allProjectToProjectModel, Project, Todo } from '../models';
@@ -44,55 +46,58 @@ const ProjectsPage: React.FC = () => {
     },
   });
 
+  const [updateProjectNameMutation] = useUpdateProjectNameMutation();
+  const [updateProjectDescriptionMutation] =
+    useUpdateProjectDescriptionMutation();
+
   console.log(response);
   const projects = allProjectToProjectModel(response);
 
   const handleClcikProjectNameEdit = (project: Project) => {
-    // const modalId = 'project-name-edit-modal';
-    // openModal(
-    //   modalId,
-    //   <ModalEditOneText
-    //     label="Project Name"
-    //     name={project.name}
-    //     onSave={(name) => {
-    //       const newProjects = projects.map((pj) => {
-    //         if (pj.id === project.id) {
-    //           pj.name = name;
-    //         }
-    //         return pj;
-    //       });
-    //       setProjects([...newProjects]);
-    //       closeModal(modalId);
-    //     }}
-    //     onClose={() => {
-    //       closeModal(modalId);
-    //     }}
-    //   />
-    // );
+    const modalId = 'project-name-edit-modal';
+    openModal(
+      modalId,
+      <ModalEditOneText
+        label="Project Name"
+        name={project.name}
+        onSave={async (name) => {
+          await updateProjectNameMutation({
+            variables: {
+              id: project.id,
+              name: name,
+            },
+          });
+          closeModal(modalId);
+        }}
+        onClose={() => {
+          closeModal(modalId);
+        }}
+      />
+    );
   };
 
   const handleClickProjectDescriptionEdit = (project: Project) => {
-    // const modalId = 'project-description-edit-modal';
-    // openModal(
-    //   modalId,
-    //   <ModalEditOneText
-    //     label="Project Overview"
-    //     name={project.description}
-    //     onSave={(description) => {
-    //       const newProjects = projects.map((pj) => {
-    //         if (pj.id === project.id) {
-    //           pj.description = description;
-    //         }
-    //         return pj;
-    //       });
-    //       setProjects([...newProjects]);
-    //       closeModal(modalId);
-    //     }}
-    //     onClose={() => {
-    //       closeModal(modalId);
-    //     }}
-    //   />
-    // );
+    const modalId = 'project-description-edit-modal';
+    openModal(
+      modalId,
+      <ModalEditOneText
+        label="Project Overview"
+        name={project.description}
+        onSave={async (description) => {
+          await updateProjectDescriptionMutation({
+            variables: {
+              id: project.id,
+              description,
+            },
+          });
+
+          closeModal(modalId);
+        }}
+        onClose={() => {
+          closeModal(modalId);
+        }}
+      />
+    );
   };
 
   const handleClickTodoNameEdit = (projectId: number, todo: Todo) => {

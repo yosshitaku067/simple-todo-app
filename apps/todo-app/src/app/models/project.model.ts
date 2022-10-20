@@ -1,4 +1,6 @@
+import dayjs from 'dayjs';
 import { Record, Array, Number, String, Literal, Static } from 'runtypes';
+import { DAYJS_FORMAT } from '../helper/dayjs-format';
 import { Todo } from './todo.model';
 
 export type Project = {
@@ -33,8 +35,8 @@ export const toProjectModel = (data: Static<typeof ProjectSchema>): Project => {
     id: data.id,
     name: data.name,
     description: data.description,
-    updatedAt: data.updatedAt,
-    createdAt: data.createdAt,
+    updatedAt: dayjs(data.updatedAt).format(DAYJS_FORMAT),
+    createdAt: dayjs(data.createdAt).format(DAYJS_FORMAT),
     todos: [],
     counts: {
       open: 0,

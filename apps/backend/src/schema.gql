@@ -19,6 +19,8 @@ scalar DateTime
 type Mutation {
   createActivity(text: String!, todoId: Int!): Activity!
   createProject(description: String = "", name: String!): Project!
+  updateProjectDescription(description: String!, id: Int!): Project!
+  updateProjectName(id: Int!, name: String!): Project!
 }
 
 type Project {
