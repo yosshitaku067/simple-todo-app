@@ -3,10 +3,6 @@
   "version": 2,
   "projects": {
     "backend": "apps/backend",
-    "frontend": "apps/frontend",
-    "frontend-e2e": "apps/frontend-e2e",
-    "server": "apps/server",
-    "todo-app": "apps/todo-app",
-    "todo-app-e2e": "apps/todo-app-e2e"
+    "todo-app": "apps/todo-app"
   }
 }

@@ -27,15 +27,9 @@
         "style": "styled-components",
         "linter": "eslint"
       }
-    },
-    "@nrwl/next": {
-      "application": {
-        "style": "styled-components",
-        "linter": "eslint"
-      }
     }
   },
-  "defaultProject": "frontend",
+  "defaultProject": "todo-app",
   "targetDefaults": {
     "build": {
       "dependsOn": ["^build"],

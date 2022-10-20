@@ -11,17 +11,41 @@ import ProjectCard from '../components/project-card.component';
 import {
   useAllProjectsQuery,
   useCreateProjectMutation,
+  AllProjectsQuery,
 } from '../graphql/generated/graphql';
 import { DAYJS_FORMAT } from '../helper/dayjs-format';
-import { Project, Todo } from '../models';
+import { allProjectToProjectModel, Project, Todo } from '../models';
+import ALL_PROJECT from '../graphql/queries/project/all-project.query';
 
 const ProjectsPage: React.FC = () => {
   const { openModal, closeModal } = useContext(modalContext);
 
   // const [projects, setProjects] = useState(PROJECTS);
 
-  const { data: projects } = useAllProjectsQuery();
-  const [createProjectMutation, { loading }] = useCreateProjectMutation();
+  const { data: response } = useAllProjectsQuery({
+    fetchPolicy: 'cache-first',
+  });
+  const [createProjectMutation, { loading }] = useCreateProjectMutation({
+    update: (cache, { data }) => {
+      console.log(cache, data);
+
+      const newProject = data?.createProject;
+      const existingProjects = cache.readQuery<AllProjectsQuery>({
+        query: ALL_PROJECT,
+      });
+
+      if (newProject && existingProjects) {
+        // FETCH_ALL_TASKSのキャッシュに新規タスクを追加
+        cache.writeQuery({
+          query: ALL_PROJECT,
+          data: { allProjects: [...existingProjects.allProjects, newProject] },
+        });
+      }
+    },
+  });
+
+  console.log(response);
+  const projects = allProjectToProjectModel(response);
 
   const handleClcikProjectNameEdit = (project: Project) => {
     // const modalId = 'project-name-edit-modal';
