@@ -14,6 +14,8 @@ type Props = {
   onClickTodoNameEdit: (todo: Todo) => void;
   onClickTodoDetailEdit: (todo: Todo) => void;
   onAddTodo: (name: string) => void;
+  onClickAddActivity: (todoId: number, text: string) => void;
+  onClickActivityEdit: (id: number, text: string) => void;
 };
 
 const ProjectCard: React.FC<Props> = ({
@@ -23,6 +25,8 @@ const ProjectCard: React.FC<Props> = ({
   onClickTodoNameEdit,
   onClickTodoDetailEdit,
   onAddTodo,
+  onClickAddActivity,
+  onClickActivityEdit,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [newTodoName, setNewTodoName] = useState('');
@@ -94,6 +98,8 @@ const ProjectCard: React.FC<Props> = ({
                       todo={todo}
                       onClcikTodoNameEdit={() => onClickTodoNameEdit(todo)}
                       onClcikTodoDetailEdit={() => onClickTodoDetailEdit(todo)}
+                      onClickAddActivity={onClickAddActivity}
+                      onClickActivityEdit={onClickActivityEdit}
                     />
                   </div>
                 );

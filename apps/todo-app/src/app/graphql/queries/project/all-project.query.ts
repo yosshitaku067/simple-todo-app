@@ -8,6 +8,26 @@ export default gql`
       description
       updatedAt
       createdAt
+      todo {
+        id
+        name
+        progress
+        user {
+          id
+          name
+          updatedAt
+          createdAt
+        }
+        activities {
+          id
+          text
+          updatedAt
+          createdAt
+        }
+        status
+        updatedAt
+        createdAt
+      }
     }
   }
 `;

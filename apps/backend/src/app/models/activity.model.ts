@@ -1,9 +1,9 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { Todo } from './todo.model';
 
 @ObjectType()
 export class Activity {
-  @Field(() => ID, { nullable: false })
+  @Field(() => Int, { nullable: false })
   id: number;
 
   @Field(() => String, { nullable: false })

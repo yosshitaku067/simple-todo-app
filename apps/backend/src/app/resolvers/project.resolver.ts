@@ -15,6 +15,39 @@ export class ProjectResolver {
       orderBy: {
         updatedAt: 'desc',
       },
+      select: {
+        id: true,
+        name: true,
+        description: true,
+        updatedAt: true,
+        createdAt: true,
+        todo: {
+          select: {
+            id: true,
+            name: true,
+            progress: true,
+            user: {
+              select: {
+                id: true,
+                name: true,
+                updatedAt: true,
+                createdAt: true,
+              },
+            },
+            activities: {
+              select: {
+                id: true,
+                text: true,
+                updatedAt: true,
+                createdAt: true,
+              },
+            },
+            status: true,
+            updatedAt: true,
+            createdAt: true,
+          },
+        },
+      },
     });
   }
 

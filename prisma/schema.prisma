@@ -53,5 +53,5 @@ model User {
 enum Status {
   OPEN
   COMPLETED
-  CLOSEED
+  CLOSED
 }

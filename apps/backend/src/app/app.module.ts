@@ -8,6 +8,8 @@ import { AppService } from './app.service';
 import { PrismaService } from './helper/prisma.service';
 import { ActivityResolver } from './resolvers/activity.resolver';
 import { ProjectResolver } from './resolvers/project.resolver';
+import { TodoResolver } from './resolvers/todo.resolver';
+import { UserResolver } from './resolvers/user.resolver';
 
 const mode = process.env['MODE'];
 const isDevelopMode = mode !== 'staging' && mode !== 'production';
@@ -28,6 +30,13 @@ console.log(__dirname, process.cwd());
     }),
   ],
   controllers: [AppController],
-  providers: [AppService, PrismaService, ActivityResolver, ProjectResolver],
+  providers: [
+    AppService,
+    PrismaService,
+    ActivityResolver,
+    ProjectResolver,
+    TodoResolver,
+    UserResolver,
+  ],
 })
 export class AppModule {}

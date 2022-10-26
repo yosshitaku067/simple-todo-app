@@ -4,7 +4,7 @@
 
 type Activity {
   createdAt: DateTime!
-  id: ID!
+  id: Int!
   text: String!
   todo: Todo!
   todoId: Float!
@@ -19,8 +19,13 @@ scalar DateTime
 type Mutation {
   createActivity(text: String!, todoId: Int!): Activity!
   createProject(description: String = "", name: String!): Project!
+  createTodo(name: String!, projectId: Int!): Todo!
+  createUser(name: String!): User!
+  updateActivity(id: Int!, text: String!): Activity!
   updateProjectDescription(description: String!, id: Int!): Project!
   updateProjectName(id: Int!, name: String!): Project!
+  updateTodoDetail(id: Int!, progress: Float!, status: Status!): Todo!
+  updateTodoName(id: Int!, name: String!): Todo!
 }
 
 type Project {
@@ -35,6 +40,7 @@ type Project {
 
 type Query {
   allProjects: [Project!]!
+  allTodos: [Todo!]!
 }
 
 """Todo Status"""
@@ -47,7 +53,7 @@ enum Status {
 type Todo {
   activities: [Activity!]!
   createdAt: DateTime!
-  id: ID!
+  id: Int!
   name: String!
   progress: Float!
   project: Todo!
@@ -66,7 +72,7 @@ type TodoCount {
 
 type User {
   createdAt: DateTime!
-  id: ID!
+  id: Int!
   name: String!
   todo: [Todo!]!
   updatedAt: DateTime!

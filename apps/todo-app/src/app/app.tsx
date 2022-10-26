@@ -9,7 +9,7 @@ import {
 
 import Title from './components/heading/title.component';
 import { ModalProvider } from './components/modal/modal.context';
-import ProjectsPage from './pages/projects.page';
+import ProjectsPage from './pages/projects/projects.page';
 
 import './styles.css';
 
