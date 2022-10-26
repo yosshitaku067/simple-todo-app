@@ -7,7 +7,9 @@
     "start:backend": "nx run backend:serve",
     "build": "nx build",
     "test": "nx test",
-    "codegen": "graphql-codegen --config codegen.ts"
+    "codegen": "graphql-codegen --config codegen.ts",
+    "build:app": "nx run todo-app:build --configuration=production",
+    "build:backend": "nx run backend:build --configuration=production"
   },
   "private": true,
   "dependencies": {
