@@ -33,7 +33,7 @@ const App: React.FC = () => {
               </Title>
             </div>
             <div className="block w-full flex-grow lg:flex lg:w-auto lg:items-center lg:justify-end">
-              <div>
+              {/* <div>
                 <a
                   href="#"
                   className="mt-4 mr-4 inline-block rounded border border-white px-4 py-2 text-sm leading-none text-white hover:border-transparent hover:bg-white hover:text-teal-500 lg:mt-0"
@@ -46,7 +46,7 @@ const App: React.FC = () => {
                 >
                   Export Text
                 </a>
-              </div>
+              </div> */}
             </div>
           </div>
         </nav>

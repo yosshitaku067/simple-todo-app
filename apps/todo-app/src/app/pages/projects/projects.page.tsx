@@ -1,4 +1,7 @@
+import dayjs from 'dayjs';
 import React, { useContext } from 'react';
+import Encoding from 'encoding-japanese';
+import Button from '../../components/buttons/button.component';
 import FormInputWithButton from '../../components/form/form-input-with-button.component';
 import HeadingPrimary from '../../components/heading/heading-primary.component';
 import ModalEditOneText from '../../components/modal/modal-edit-one-text.component';
@@ -17,12 +20,11 @@ import {
   useCreateActivityMutation,
   useUpdateActivityMutation,
 } from '../../graphql/generated/graphql';
+import { DAYJS_FORMAT } from '../../helper/dayjs-format';
 import { allProjectToProjectModel, Project, Todo } from '../../models';
 
 const ProjectsPage: React.FC = () => {
   const { openModal, closeModal } = useContext(modalContext);
-
-  // const [projects, setProjects] = useState(PROJECTS);
 
   const { data: response, refetch: refetchAllProject } = useAllProjectsQuery({
     fetchPolicy: 'cache-first',
@@ -38,7 +40,6 @@ const ProjectsPage: React.FC = () => {
   const [createActivityMutation] = useCreateActivityMutation();
   const [updateActivityMutation] = useUpdateActivityMutation();
 
-  console.log(response);
   const projects = allProjectToProjectModel(response);
 
   const handleClcikProjectNameEdit = (project: Project) => {
@@ -217,10 +218,68 @@ const ProjectsPage: React.FC = () => {
     );
   };
 
+  const handleOnClickExportMarkdown = () => {
+    const now = dayjs().format(DAYJS_FORMAT);
+    const textLines: string[] = ['# All Projects', now, ''];
+
+    for (const project of projects) {
+      textLines.push(`## ${project.name}`);
+      textLines.push(`作成日: ${project.createdAt}`);
+      textLines.push(`更新日: ${project.updatedAt}`);
+
+      if (project.todos.length === 0) {
+        textLines.push('TODOが登録されていません。');
+      }
+
+      for (const todo of project.todos) {
+        textLines.push(`### ${todo.name}`);
+        textLines.push(`作成日: ${todo.createdAt}`);
+        textLines.push(`更新日: ${todo.updatedAt}`);
+        textLines.push(`進捗率: ${todo.progress} %`);
+        textLines.push(`ステータス: ${todo.status}`);
+        textLines.push('#### 活動履歴');
+
+        if (todo.activities.length === 0) {
+          textLines.push('- 活動履歴はありません。');
+        }
+
+        for (const activity of todo.activities) {
+          textLines.push(
+            `- ${activity.text} (作成日: ${activity.createdAt}, 更新日: ${activity.updatedAt})`
+          );
+        }
+
+        textLines.push(``);
+      }
+    }
+
+    console.log(textLines.join('\n'));
+
+    const downloadLink = document.createElement('a');
+    downloadLink.download = `全プロジェクト出力_${now}.md`;
+
+    const unicodeArray = Encoding.stringToCode(textLines.join('\n'));
+    const sjisArray = Encoding.convert(unicodeArray, {
+      to: 'SJIS',
+      from: 'UNICODE',
+    });
+    const uint8Array = new Uint8Array(sjisArray);
+
+    downloadLink.href = URL.createObjectURL(
+      new Blob([uint8Array], { type: 'text/markdown' })
+    );
+
+    downloadLink.click();
+  };
+
   return (
     <div className="mt-2">
-      <div className="mb-3">
+      <div className="mb-3 flex items-center justify-between">
         <HeadingPrimary data-en="Projects">プロジェクト一覧</HeadingPrimary>
+
+        <div>
+          <Button onClick={handleOnClickExportMarkdown}>Export Markdown</Button>
+        </div>
       </div>
 
       <div className="mb-3">
