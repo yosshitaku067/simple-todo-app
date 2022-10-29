@@ -12,9 +12,9 @@ import { TodoResolver } from './resolvers/todo.resolver';
 import { UserResolver } from './resolvers/user.resolver';
 
 const mode = process.env['MODE'];
-const isDevelopMode = mode !== 'staging' && mode !== 'production';
+const isDevelopMode = mode === 'develop';
 
-console.log(__dirname, process.cwd());
+console.log(__dirname, process.cwd(), isDevelopMode);
 
 @Module({
   imports: [
@@ -26,7 +26,7 @@ console.log(__dirname, process.cwd());
       useGlobalPrefix: true,
       autoSchemaFile: isDevelopMode
         ? join(process.cwd(), 'apps/backend/src/schema.gql')
-        : join(__dirname, 'schema.gql'),
+        : join(process.cwd(), 'dist/apps/backend/schema.gql'),
     }),
   ],
   controllers: [AppController],

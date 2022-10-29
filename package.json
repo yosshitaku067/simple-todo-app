@@ -4,12 +4,15 @@
   "license": "MIT",
   "scripts": {
     "start": "nx serve",
-    "start:backend": "nx run backend:serve",
+    "start:backend": "dotenv -e env/.develop.env nx run backend:serve",
+    "start:backend:prod": "dotenv -e env/.develop.env node dist/apps/backend/main.js",
     "build": "nx build",
     "test": "nx test",
     "codegen": "graphql-codegen --config codegen.ts",
     "build:app": "nx run todo-app:build --configuration=production",
-    "build:backend": "nx run backend:build --configuration=production"
+    "build:backend": "nx run backend:build --configuration=production",
+    "db:push:dev": "dotenv -e env/.develop.env prisma db push",
+    "db:push:prod": "dotenv -e env/.production.env prisma db push"
   },
   "private": true,
   "dependencies": {
@@ -24,6 +27,7 @@
     "axios": "^1.1.3",
     "core-js": "^3.6.5",
     "dayjs": "^1.11.5",
+    "dotenv": "^16.0.3",
     "encoding-japanese": "^2.0.0",
     "graphql": "^16.6.0",
     "next": "12.3.1",
@@ -74,6 +78,7 @@
     "babel-jest": "28.1.1",
     "babel-plugin-styled-components": "1.10.7",
     "cypress": "^10.7.0",
+    "dotenv-cli": "^6.0.0",
     "eslint": "~8.15.0",
     "eslint-config-next": "12.3.1",
     "eslint-config-prettier": "8.1.0",
@@ -84,6 +89,7 @@
     "eslint-plugin-react-hooks": "4.6.0",
     "jest": "28.1.1",
     "jest-environment-jsdom": "28.1.1",
+    "npm-run-all": "^4.1.5",
     "nx": "15.0.0",
     "postcss": "8.4.16",
     "prettier": "^2.7.1",

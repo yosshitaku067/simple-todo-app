@@ -12,5 +12,16 @@ services:
     environment:
       - POSTGRES_PASSWORD=postgres
     restart: always
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "8443:80"
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/nginx/logs:/var/log/nginx
+      - ./dist/apps/todo-app:/usr/share/nginx/html
 volumes:
   db-store:
