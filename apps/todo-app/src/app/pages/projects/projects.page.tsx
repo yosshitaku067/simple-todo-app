@@ -253,8 +253,6 @@ const ProjectsPage: React.FC = () => {
       }
     }
 
-    console.log(textLines.join('\n'));
-
     const downloadLink = document.createElement('a');
     downloadLink.download = `全プロジェクト出力_${now}.md`;
 
