@@ -1,7 +1,7 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { Todo } from './todo.model';
 
-@ObjectType()
+@ObjectType('TodoCount')
 class TodoCount {
   @Field(() => Number, { nullable: false })
   open: number;
@@ -13,7 +13,7 @@ class TodoCount {
   completed: number;
 }
 
-@ObjectType()
+@ObjectType('Project')
 export class Project {
   @Field(() => Int, { nullable: false })
   id: number;

@@ -1,7 +1,6 @@
 import { Args, Float, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { PrismaService } from '../helper/prisma.service';
 import { Status } from '../models/enums/status.enum';
-import { Project } from '../models/project.model';
 import { Todo } from '../models/todo.model';
 
 @Resolver(() => Todo)
@@ -32,10 +31,9 @@ export class TodoResolver {
     return this.prisma.todo.create({
       data: {
         name,
-        projectId,
+        projectId: projectId,
         progress: 0,
         status: 'OPEN',
-        userId: 1,
       },
     });
   }

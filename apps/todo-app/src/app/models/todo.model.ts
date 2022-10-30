@@ -10,7 +10,7 @@ import {
 } from 'runtypes';
 import { DAYJS_FORMAT } from '../helper/dayjs-format';
 import { ActivitySchema, toActivityModel } from './activity.model';
-import { toUserModel, UserSchema } from './user.model';
+// import { toUserModel, UserSchema } from './user.model';
 
 export const TodoSchema = Record({
   __typename: Literal('Todo'),
@@ -20,7 +20,7 @@ export const TodoSchema = Record({
   status: Union(Literal('OPEN'), Literal('CLOSED'), Literal('COMPLETED')),
   updatedAt: String,
   createdAt: String,
-  user: UserSchema,
+  // user: UserSchema,
   activities: Array(ActivitySchema),
 });
 
@@ -33,7 +33,7 @@ export const toTodoModel = (data: Static<typeof TodoSchema>): Todo => {
     activities: data.activities.map(toActivityModel),
     progress: data.progress,
     status: data.status,
-    user: toUserModel(data.user),
+    // user: toUserModel(data.user),
   };
 };
 
@@ -49,12 +49,12 @@ export type Todo = {
   progress: number;
   updatedAt: string;
   createdAt: string;
-  user: {
-    id: number;
-    name: string;
-    updatedAt: string;
-    createdAt: string;
-  };
+  // user: {
+  //   id: number;
+  //   name: string;
+  //   updatedAt: string;
+  //   createdAt: string;
+  // };
   status: TodoStatus;
 };
 

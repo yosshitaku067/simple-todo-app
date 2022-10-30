@@ -2,9 +2,9 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { Activity } from './activity.model';
 import { Status } from './enums/status.enum';
 import { Project } from './project.model';
-import { User } from './user.model';
+// import { User } from './user.model';
 
-@ObjectType()
+@ObjectType('Todo')
 export class Todo {
   @Field(() => Int, { nullable: false })
   id: number;
@@ -27,8 +27,8 @@ export class Todo {
   @Field(() => Number, { nullable: false })
   userId: number;
 
-  @Field(() => User, { nullable: false })
-  user: User;
+  // @Field(() => User, { nullable: false })
+  // user: User;
 
   @Field(() => Status, { nullable: false })
   status: Status;

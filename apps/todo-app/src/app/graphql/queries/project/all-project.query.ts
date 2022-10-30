@@ -12,12 +12,6 @@ export default gql`
         id
         name
         progress
-        user {
-          id
-          name
-          updatedAt
-          createdAt
-        }
         activities {
           id
           text

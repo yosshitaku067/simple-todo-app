@@ -31,7 +31,6 @@ export type Mutation = {
   createActivity: Activity;
   createProject: Project;
   createTodo: Todo;
-  createUser: User;
   updateActivity: Activity;
   updateProjectDescription: Project;
   updateProjectName: Project;
@@ -55,11 +54,6 @@ export type MutationCreateProjectArgs = {
 export type MutationCreateTodoArgs = {
   name: Scalars['String'];
   projectId: Scalars['Int'];
-};
-
-
-export type MutationCreateUserArgs = {
-  name: Scalars['String'];
 };
 
 
@@ -128,7 +122,6 @@ export type Todo = {
   projectId: Scalars['Float'];
   status: Status;
   updatedAt: Scalars['DateTime'];
-  user: User;
   userId: Scalars['Float'];
 };
 
@@ -137,15 +130,6 @@ export type TodoCount = {
   closed: Scalars['Float'];
   completed: Scalars['Float'];
   open: Scalars['Float'];
-};
-
-export type User = {
-  __typename?: 'User';
-  createdAt: Scalars['DateTime'];
-  id: Scalars['Int'];
-  name: Scalars['String'];
-  todo: Array<Todo>;
-  updatedAt: Scalars['DateTime'];
 };
 
 export type CreateActivityMutationVariables = Exact<{
@@ -167,7 +151,7 @@ export type UpdateActivityMutation = { __typename?: 'Mutation', updateActivity: 
 export type AllProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllProjectsQuery = { __typename?: 'Query', allProjects: Array<{ __typename?: 'Project', id: number, name: string, description: string, updatedAt: any, createdAt: any, todo: Array<{ __typename?: 'Todo', id: number, name: string, progress: number, status: Status, updatedAt: any, createdAt: any, user: { __typename?: 'User', id: number, name: string, updatedAt: any, createdAt: any }, activities: Array<{ __typename?: 'Activity', id: number, text: string, updatedAt: any, createdAt: any }> }> }> };
+export type AllProjectsQuery = { __typename?: 'Query', allProjects: Array<{ __typename?: 'Project', id: number, name: string, description: string, updatedAt: any, createdAt: any, todo: Array<{ __typename?: 'Todo', id: number, name: string, progress: number, status: Status, updatedAt: any, createdAt: any, activities: Array<{ __typename?: 'Activity', id: number, text: string, updatedAt: any, createdAt: any }> }> }> };
 
 export type CreateProjectMutationVariables = Exact<{
   name: Scalars['String'];
@@ -307,12 +291,6 @@ export const AllProjectsDocument = gql`
       id
       name
       progress
-      user {
-        id
-        name
-        updatedAt
-        createdAt
-      }
       activities {
         id
         text

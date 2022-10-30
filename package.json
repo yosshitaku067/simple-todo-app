@@ -6,13 +6,16 @@
     "start": "nx serve",
     "start:backend": "dotenv -e env/.develop.env nx run backend:serve",
     "start:backend:prod": "dotenv -e env/.production.env node dist/apps/backend/main.js",
+    "prestart:backend:prod": "npm run build:backend",
     "build": "nx build",
     "test": "nx test",
     "codegen": "graphql-codegen --config codegen.ts",
     "build:app": "nx run todo-app:build --configuration=production",
     "build:backend": "nx run backend:build --configuration=production",
     "db:push:dev": "dotenv -e env/.develop.env prisma db push",
-    "db:push:prod": "dotenv -e env/.production.env prisma db push"
+    "db:push:prod": "dotenv -e env/.production.env prisma db push",
+    "db:generate:dev": "dotenv -e env/.develop.env prisma generate",
+    "db:generate:prod": "dotenv -e env/.production.env prisma generate"
   },
   "private": true,
   "dependencies": {

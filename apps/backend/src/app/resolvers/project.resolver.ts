@@ -26,14 +26,6 @@ export class ProjectResolver {
             id: true,
             name: true,
             progress: true,
-            user: {
-              select: {
-                id: true,
-                name: true,
-                updatedAt: true,
-                createdAt: true,
-              },
-            },
             activities: {
               select: {
                 id: true,

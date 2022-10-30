@@ -9,7 +9,6 @@ import { PrismaService } from './helper/prisma.service';
 import { ActivityResolver } from './resolvers/activity.resolver';
 import { ProjectResolver } from './resolvers/project.resolver';
 import { TodoResolver } from './resolvers/todo.resolver';
-import { UserResolver } from './resolvers/user.resolver';
 
 const mode = process.env['MODE'];
 const isDevelopMode = mode === 'develop';
@@ -36,7 +35,6 @@ console.log(__dirname, process.cwd(), isDevelopMode);
     ActivityResolver,
     ProjectResolver,
     TodoResolver,
-    UserResolver,
   ],
 })
 export class AppModule {}

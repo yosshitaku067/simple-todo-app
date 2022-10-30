@@ -40,9 +40,27 @@ export const toProjectModel = (data: Static<typeof ProjectSchema>): Project => {
     createdAt: dayjs(data.createdAt).format(DAYJS_FORMAT),
     todos: data.todo.map(toTodoModel),
     counts: {
-      open: 0,
-      closed: 0,
-      completed: 0,
+      open: data.todo.reduce((prev, cur) => {
+        if (cur.status === 'OPEN') {
+          return prev + 1;
+        }
+
+        return prev;
+      }, 0),
+      closed: data.todo.reduce((prev, cur) => {
+        if (cur.status === 'CLOSED') {
+          return prev + 1;
+        }
+
+        return prev;
+      }, 0),
+      completed: data.todo.reduce((prev, cur) => {
+        if (cur.status === 'COMPLETED') {
+          return prev + 1;
+        }
+
+        return prev;
+      }, 0),
     },
   };
 };

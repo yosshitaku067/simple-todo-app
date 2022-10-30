@@ -20,7 +20,6 @@ type Mutation {
   createActivity(text: String!, todoId: Int!): Activity!
   createProject(description: String = "", name: String!): Project!
   createTodo(name: String!, projectId: Int!): Todo!
-  createUser(name: String!): User!
   updateActivity(id: Int!, text: String!): Activity!
   updateProjectDescription(description: String!, id: Int!): Project!
   updateProjectName(id: Int!, name: String!): Project!
@@ -60,7 +59,6 @@ type Todo {
   projectId: Float!
   status: Status!
   updatedAt: DateTime!
-  user: User!
   userId: Float!
 }
 
@@ -68,12 +66,4 @@ type TodoCount {
   closed: Float!
   completed: Float!
   open: Float!
-}
-
-type User {
-  createdAt: DateTime!
-  id: Int!
-  name: String!
-  todo: [Todo!]!
-  updatedAt: DateTime!
 }
