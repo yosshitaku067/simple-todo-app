@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nx serve",
     "start:backend": "dotenv -e env/.develop.env nx run backend:serve",
-    "start:backend:prod": "dotenv -e env/.develop.env node dist/apps/backend/main.js",
+    "start:backend:prod": "dotenv -e env/.production.env node dist/apps/backend/main.js",
     "build": "nx build",
     "test": "nx test",
     "codegen": "graphql-codegen --config codegen.ts",
