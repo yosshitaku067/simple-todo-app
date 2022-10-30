@@ -24,7 +24,6 @@ stages: # List of stages for jobs, and their order of execution
 
 build-job:
   stage: build
-  image: node:lts
   variables:
     GIT_CLEAN_FLAGS: -ffdx -e node_modules/
   script:
@@ -37,7 +36,6 @@ build-job:
 
 release-job:
   stage: release
-  image: alpine:latest
   script:
     - ls dist/apps/todo-app
     - apk --update add git
